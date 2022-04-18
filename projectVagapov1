@@ -1,0 +1,45 @@
+//BS - пузырьковая сортировка.
+class BS {
+private:
+	int* arr_BS;
+	int size;
+	//порождение случайной перестановки в массиве
+	void Random_Permutation() {
+		srand(time(NULL));
+		for (int i = size - 2; i >= 0; i -= 2) {
+			int temp = arr_BS[i];
+			int j = rand() % (i - 1) + 1;
+			arr_BS[i] = arr_BS[j];
+			arr_BS[j] = temp;
+		}
+	}
+public:
+	BS(int size) {
+		this->size = size;
+		arr_BS = new int[this->size];
+		for (int i = 0; i < this->size; i++) {
+			arr_BS[i] = i;
+		}
+	}
+	void Sort_BS() {
+		Random_Permutation();
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size - i-1; j++) {
+				if (arr_BS[j] > arr_BS[j + 1]) {
+					int temp = arr_BS[j + 1];
+					arr_BS[j + 1] = arr_BS[j];
+					arr_BS[j] = temp;
+				}
+			}
+		}
+	}
+
+	void Print_BS() {
+		for (int i = 0; i < size; i++) {
+			cout << arr_BS[i] << ' ';
+		}
+	}
+	~BS() {
+		delete[]arr_BS;
+	}
+};
